@@ -13,10 +13,14 @@
                     <input type="text" class="form-control" name="firstname" placeholder="firstname">
                 </div>
                 <div class="form-group">
+                    <label for="lastname">lastname</label>
+                    <input type="text" class="form-control" name="lastname" placeholder="lastname">
+                </div>
+                <div class="form-group">
                     <label for="gender">Gender</label>
                     <select name="gender" class="form-control">
-                        <option value="men">men</option>
-                        <option value="women">women</option>
+                        <option value="1">men</option>
+                        <option value="2">women</option>
                     </select>
                 </div>
                 <div class="form-group">
@@ -29,19 +33,19 @@
                 <div class="form-group">
                     <div class="radio">
                       <label>
-                        <input type="radio" name="mood" value="happy" checked>
+                        <input type="radio" name="mood" value="1" checked>
                             Happy
                       </label>
                     </div>
                     <div class="radio">
                       <label>
-                        <input type="radio" name="mood" value="sad">
+                        <input type="radio" name="mood" value="2">
                             Sad
                       </label>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
+                <a href="{{route('index')}}"><button type="button" class="btn btn-primary">Afficher tous les utilisateurs</button></a>
         </div>
     </div>
 

@@ -2,28 +2,55 @@
 
 namespace App;
 
-use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends Authenticatable
+class User extends Model
 {
-    use Notifiable;
+    protected $table = 'users';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password',
+    const OTHER = 0;
+    const MALE = 1;
+    const FEMALE = 2;
+
+    const SAD = 2;
+    const HAPPY = 1;
+
+    const SUSCRIBE = 1;
+    const NOT_SUSCRIBE = 0;
+
+    protected $casts = [
+      'gender' => 'integer',
+      'mood' => 'integer',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function news() {
+        return $this->hasMany('App\News');
+    }
+
+    public static function gender($gender){
+        $genders = [
+            self::OTHER => 'Other',
+            self::MALE => 'Homme',
+            self::FEMALE => 'Femme'
+        ];
+        return $genders[$gender];
+    }
+
+    public static function mood($mood){
+        $moods = [
+            self::OTHER => 'Other',
+            self::SAD => 'Triste',
+            self::HAPPY => 'Heureux'
+        ];
+        return $moods[$mood];
+    }
+
+    public static function newsletter($newsletter){
+        $newsletters = [
+            self::OTHER => 'Other',
+            self::SUSCRIBE => 'Abonné',
+            self::NOT_SUSCRIBE => 'Non Abonné'
+        ];
+        return $newsletters[$newsletter];
+    }
 }

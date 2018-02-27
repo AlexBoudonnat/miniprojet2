@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
+use Symfony\Component\CssSelector\Exception\InternalErrorException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UserController extends Controller
 {
@@ -13,7 +16,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = User::orderBy('user_id')->get();
+        return view('user.index', ['users'=>$users]);
     }
 
     /**
@@ -34,17 +38,26 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $data = [
-            'user' => [
-                'firstname' => $request->input('firstname'),
-                'gender' => $request->input('gender'),
-                'newsletter' => $request->input('newsletter'),
-                'mood' => $request->input('mood'),
-            ],
-        ];
+        $user = new User();
+        $user->setAttribute('firstname', $request->input('firstname')); $user->firstname = $request['firstname'];
+        $user->setAttribute('lastname', $request->input('lastname'));
+        $user->setAttribute('gender', $request->input('gender'));
+        $user->setAttribute('mood', $request->input('mood'));
+        if ($request->input('newsletter') === 'yes'){
+            $user->setAttribute('newsletter', true);
+        } else {
+            $user->setAttribute('newsletter', false);
+        }
 
-        return view('user.result', $data);
+        if ($user->save()) {
+            $data = [
+                'user' => $user
+            ];
 
+            return view('user.result', $data);
+        } else {
+            throw new InternalErrorException();
+        }
     }
 
     /**
