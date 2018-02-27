@@ -39,7 +39,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $user = new User();
-        $user->setAttribute('firstname', $request->input('firstname')); $user->firstname = $request['firstname'];
+        $user->setAttribute('firstname', $request->input('firstname'));
         $user->setAttribute('lastname', $request->input('lastname'));
         $user->setAttribute('gender', $request->input('gender'));
         $user->setAttribute('mood', $request->input('mood'));
@@ -50,11 +50,7 @@ class UserController extends Controller
         }
 
         if ($user->save()) {
-            $data = [
-                'user' => $user
-            ];
-
-            return view('user.result', $data);
+            return view('user.result', ['user' => $user]);
         } else {
             throw new InternalErrorException();
         }

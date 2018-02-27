@@ -16,8 +16,11 @@ Route::get('/', function () {
 });
 
 Route::get('/user/create', 'UserController@create');
+
 Route::post('/user', ['uses'=>'UserController@store', 'as'=>'postForm']);
+
+Route::get('/user/index', ['uses'=>'UserController@index', 'as'=>'index']);
 
 Route::get('/news/create', 'NewsController@create');
 
-Route::get('/user/index', ['uses'=>'UserController@index', 'as'=>'index']);
+Route::post('/news', ['uses'=>'NewsController@store', 'as'=>'postNews']);

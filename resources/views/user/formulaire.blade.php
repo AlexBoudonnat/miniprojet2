@@ -6,7 +6,7 @@
             <h2 class="panel-title">Formulaire #1 Utilisateur</h2>
         </div>
         <div class="panel-body">
-            <form class="" action="/user" method="post">
+            <form class="" action="{{route('postForm')}}" method="post">
                 {{ csrf_field() }}
                 <div class="form-group">
                     <label for="firstname">firstname</label>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -34,8 +35,13 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $news = new News();
+        $news->setAttribute('title', $request->input('title'));
+        $news->setAttribute('content', $request->input('content'));
+
+        return view('news.formulaire', ['news'=>$news]);
     }
+
 
     /**
      * Display the specified resource.
