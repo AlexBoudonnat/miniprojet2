@@ -24,3 +24,5 @@ Route::get('/user/index', ['uses'=>'UserController@index', 'as'=>'index']);
 Route::get('/news/create', 'NewsController@create');
 
 Route::post('/news', ['uses'=>'NewsController@store', 'as'=>'postNews']);
+
+Route::get('/news/result', ['uses'=>'NewsController@index', 'as'=>'allNews']);

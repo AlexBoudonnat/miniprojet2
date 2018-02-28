@@ -19,7 +19,8 @@
 
             <h3>Mood</h3>
             <p>valeur : <b>{{ \App\User::mood($user['mood']) }}</b></p>
-            <div><button><a href="{{route('index')}}">Afficher tous les utilisateurs</a></button></div>
+
+            <div><a href="{{route('index')}}"><button class="btn btn-primary">Afficher tous les utilisateurs</button></a></div>
         </div>
     </div>
 

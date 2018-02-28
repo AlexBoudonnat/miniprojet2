@@ -14,7 +14,8 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //
+        $newses = News::orderBy('news_id')->get();
+        return view('news.result', ['newses'=>$newses]);
     }
 
     /**
@@ -36,10 +37,16 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $news = new News();
+        $news->setAttribute('user_id', $request->input('user_id'));
         $news->setAttribute('title', $request->input('title'));
         $news->setAttribute('content', $request->input('content'));
 
-        return view('news.formulaire', ['news'=>$news]);
+        if ($news->save()){
+            return view('news.formulaire', ['news'=>$news]);
+        } else {
+            throw new InternalErrorException();
+        }
+
     }
 
 

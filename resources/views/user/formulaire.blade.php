@@ -46,6 +46,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a href="{{route('index')}}"><button type="button" class="btn btn-primary">Afficher tous les utilisateurs</button></a>
+            </form>
         </div>
     </div>
 
